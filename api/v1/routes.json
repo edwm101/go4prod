@@ -1,0 +1,38 @@
+{
+      "auth": [{
+                  "paths": "/auth/user/validation",
+                  "methods": "GET|POST",
+                  "roles": [{
+                        "key": "role",
+                        "types": ["user","admin"]
+                  }]
+            },
+            {
+                  "paths": "/menu/.*|/resto/.*",
+                  "roles": [{
+                        "key": "role",
+                        "types": ["user"]
+                  }],
+                  "token_keys": [{
+                        "key": "restaurant_id",
+                        "define": "RESTAURANT_ID"
+                  }, {
+                        "key": "id",
+                        "define": "USER_ID"
+                  }]
+            }
+      ],
+      "mounts": [{
+            "path": "/menu",
+            "controller": "menu/index"
+      }, {
+            "path": "/resto",
+            "controller": "resto/index"
+      }, {
+            "path": "/auth",
+            "controller": "auth/index"
+      },{
+            "path": "/admin/crawling",
+            "controller": "admin/crawling/index"
+      }]
+} 

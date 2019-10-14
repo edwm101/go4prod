@@ -1,0 +1,41 @@
+export default {
+  fr: {
+    orderToday: "Commandes du jour",
+    orderScheduled: "Précommandes",
+    orderHistory: "Historique des commandes",
+    truckDelivery: "Suivi des livreurs",
+    zoneDelivery: "Zones de livraison",
+    menu: "Carte",
+    operatingHours: "Horaires",
+    discounts: "Promotions",
+    statistics: "Statistiques",
+    clients: "Clients",
+    myResto: "Mon restaurant",
+    myAccount: "Mon compte",
+    help: "Aide",
+    welcome: "Bienvenue",
+    addProduct: "Ajoute un produit",
+    allRestaurants: "Tous les restaurants",
+    payment:"Paiement"
+  },
+  en: {
+    orderToday: "Orders of the day",
+    orderScheduled: "Preorders",
+    orderHistory: "Order history",
+    truckDelivery: "Delivery Tracker",
+    zoneDelivery: "Delivery areas",
+    menu: "Menu",
+    operatingHours: "Schedule",
+    promotions: "Promotions",
+    statistics: "Statistics",
+    clients: "Clients",
+    myResto: "My restaurant",
+    myAccount: "My account",
+    help: "Help",
+    welcome: "Welcome",
+    addProduct: "Add a new product",
+    allRestaurants: "All restaurants",
+    payment:"Payment"
+
+  },
+}
