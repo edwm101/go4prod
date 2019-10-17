@@ -12,23 +12,34 @@
             @click="loader = 'loading3'"
             v-on="on"
           >
-            Add product
+            Add a product
             <v-icon right dark>mdi-plus</v-icon>
           </v-btn>
         </template>
         <v-card>
-          <v-card-title >Add a new product</v-card-title>
+          <v-card-title>Add a new product</v-card-title>
           <v-divider></v-divider>
-          <v-card-text style="height: 350px;" class="pa-0">
+          <v-card-text style="height: 450px;" class="pa-0">
             <v-row no-gutters>
               <v-col cols="8">
                 <v-card outlined class="ma-1 pa-2">
                   <v-row>
-                    <v-col md="8">
+                    <v-col md="12">
                       <v-text-field outlined label="Name" counter maxlength="50" required></v-text-field>
                     </v-col>
-                    <v-col md="4">
-                      <v-text-field outlined label="Price" counter maxlength="50" required></v-text-field>
+                    <v-col md="6">
+                      <v-text-field
+                        outlined
+                        label="Regular rate
+ (Price)"
+                        counter
+                        maxlength="50"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col md="6">
+                      <v-text-field outlined label="Promo rate
+" counter maxlength="50" required></v-text-field>
                     </v-col>
                   </v-row>
                   <v-textarea outlined label="Short description" counter maxlength="250" required></v-textarea>
@@ -51,7 +62,6 @@
                     label="Category"
                     required
                   ></v-select>
-
                 </v-card>
               </v-col>
             </v-row>

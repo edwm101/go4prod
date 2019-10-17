@@ -23,12 +23,6 @@
             }
       ],
       "mounts": [{
-            "path": "/menu",
-            "controller": "menu/index"
-      }, {
-            "path": "/resto",
-            "controller": "resto/index"
-      }, {
             "path": "/auth",
             "controller": "auth/index"
       },{

@@ -22,7 +22,7 @@ SetEnvIfNoCase ^User-Agent$ .*(libwww-perl|aesop_com_spiderman) HTTP_SAFE_BADBOT
 Deny from env=HTTP_SAFE_BADBOT
 
 RewriteRule ^/?routes.json$ - [F,L]
-RewriteRule ^/?controllers/.* - [F,L]
+#RewriteRule ^/?controllers/.* - [F,L]
 RewriteRule ^/?config/.* - [F,L]
 RewriteRule ^/?services/.* - [F,L]
 RewriteRule ^/?classes/.* - [F,L]

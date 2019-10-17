@@ -9,7 +9,7 @@ import JwtService from "@/common/jwt.service";
 // create an axios instance
 const service = axios.create({
   baseURL: API_URL,
-  timeout: 10000, // request timeout
+  timeout: 50000, // request timeout
 });
 
 // request interceptor
