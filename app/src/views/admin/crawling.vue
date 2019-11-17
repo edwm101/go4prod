@@ -170,6 +170,7 @@ export default {
 
       response.data.status = true;
       this.products.unshift(response.data.info);
+      console.log(this.products);
       this.$store.commit("LAYOUT_SET_LOAD_PROGRESS", false);
     },
     async crawlAll() {

@@ -1,6 +1,6 @@
 <?php
 
-$router->get('/sitemap-convert', function () {
+$router->get('crawling/sitemap-convert', function () {
     global $_get, $result;
     $url = $_get->url;
     $fileContents = file_get_contents($url);

@@ -1,4 +1,5 @@
 <?php
+
 namespace database;
 
 /**
@@ -64,9 +65,9 @@ class DB extends \PDO
      */
     static function getInstance($instance = 'default')
     {
-        if(!array_key_exists($instance, self::$instances)) {
+        if (!array_key_exists($instance, self::$instances)) {
             // check if configuration exists
-            if(!array_key_exists($instance, self::$config)) {
+            if (!array_key_exists($instance, self::$config)) {
                 throw new \Exception("Configuration is not set. Use DB::setConfig(options, [instance]) to set");
             }
 
@@ -111,13 +112,14 @@ class DB extends \PDO
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
             \PDO::ATTR_EMULATE_PREPARES   => false,
+            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
         );
 
         try {
             // We're using @ because PDO produces Warning before PDOException.
             @parent::__construct($dsn, $username, $password, $options);
         } catch (\Exception $e) {
-            if(null !== self::$exception_callback && is_callable(self::$exception_callback)) {
+            if (null !== self::$exception_callback && is_callable(self::$exception_callback)) {
                 call_user_func_array(self::$exception_callback, array($e));
             } else {
                 throw $e;

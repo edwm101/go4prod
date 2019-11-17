@@ -7,13 +7,13 @@ header("Access-Control-Allow-Methods:  GET,POST,PUT,DELETE,PATCH");
 
 
 //REQUIRES
-require_once './classes/upload/Upload.php'; // Take a look at this link : https://github.com/verot/class.upload.php
+require_once './classes/upload/Upload.php';
 require_once './config/database.php'; // get database connection  -- (By SASA)
 require_once './classes/Router.php';
 require_once './classes/Func.php'; //Shared function (STATIC)
 require_once './classes/Auth.php'; //Required to handle JWT (STATIC)
-require_once './classes/ShQuery.php'; //Shared query between object
- 
+require_once './classes/ShQuery.php'; //Shared query between object (STATIC)
+
 
 //classes initialisation
 $router = new \Bramus\Router\Router();
@@ -22,10 +22,10 @@ Auth::init();
 ShQuery::init($db);
 
 
-//Get posted data body {"id" : 3,"name":"Med",...}
-$_post  = json_decode(file_get_contents("php://input"));
-$_get   = json_decode(json_encode($_GET), FALSE);
-
+//Get posted data body or x-www-form
+if (!$_post   = json_decode(file_get_contents("php://input")))
+    $_post   = json_decode(json_encode($_POST), FALSE);
+$_get    = json_decode(json_encode($_GET), FALSE);
 
 //Insert the request inside result.. Ex: $result["items"] = query result
 $result = array();
@@ -41,7 +41,7 @@ $router->before('OPTIONS', "{*}", function () {  // Verifies all the headers sen
 
 // Before Router Middleware 
 foreach ($routes["auth"] as $key => $item) {
-    
+
     if (!array_key_exists("methods", $item)) {
         $_methods = 'GET|POST|PUT|DELETE|PATCH';
     } else {
@@ -55,10 +55,8 @@ foreach ($routes["auth"] as $key => $item) {
             if (!Auth::isAuth()) {  //To see if the token is valid
                 Func::error($result);
             }
-            foreach ($item["roles"] as $role) {
-                if (!in_array(@Auth::authData()->{$role["key"]}, $role["types"])) {  //To see if the current auth have the permission
-                    Func::error("Only " . implode(" and ", $role["types"]) . " can access this content");
-                }
+            if (!in_array(@Auth::authData()->role, $item["roles"])) {  //To see if the current auth have the permission
+                Func::error("Only " . implode(" and ", $item["roles"]) . " can access this content");
             }
             if (array_key_exists("token_keys", $item)) {
                 foreach ($item["token_keys"] as $token_key) {
@@ -76,7 +74,7 @@ foreach ($routes["auth"] as $key => $item) {
 // Custom mount Handler -- (Controllers)
 foreach ($routes["mounts"] as $key => $item) {
     $router->mount($item["path"], function () use ($router, $item, $db) {
-        include_once('./controllers/' . $item['controller'] . '.php');
+        include_once('./Controller/' . $item['controller'] . '.php');
     });
 }
 /**** ROUTES *****/
