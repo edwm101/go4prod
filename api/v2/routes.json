@@ -1,0 +1,37 @@
+{
+  "auth": [
+    {
+      "paths": "/auth/validation",
+      "methods": "GET|POST",
+      "roles": ["user", "admin"]
+    },
+    {
+      "paths": "/partner/.*",
+      "roles": ["user"],
+      "token_keys": [
+        {
+          "key": "restaurant_id",
+          "define": "RESTAURANT_ID"
+        },
+        {
+          "key": "id",
+          "define": "USER_ID"
+        }
+      ]
+    }
+  ],
+  "mounts": [
+    {
+      "path": "/public",
+      "controller": "public/index"
+    },
+    {
+      "path": "/admin",
+      "controller": "admin/index"
+    },
+    {
+      "path": "/auth",
+      "controller": "auth"
+    }
+  ]
+}

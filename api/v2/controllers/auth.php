@@ -1,9 +1,8 @@
 <?php
 
 
-define("TOKEN_STATEMENT", "id,first_name,last_name,email,role");
 
-$router->get('/user/validation', function () {
+$router->get('validation', function () {
     global $result;
     $result["info"] = Auth::authData();
     $result["refresh_token"] = Auth::createToken(Auth::authData());
@@ -11,7 +10,7 @@ $router->get('/user/validation', function () {
 
 
 $router->post(
-    '/user/signin',
+    'signin',
     function () {
         global $db, $result, $_post;
 
@@ -20,18 +19,27 @@ $router->post(
         $recaptchaToken = @$_post->recaptchaToken;
 
         // if (!Func::recaptcha($recaptchaToken))
-        //     Func::error("", 451, 'RECAPTCHA_ERROR');
+        //     Func::error("RECAPTCHA_ERROR", 451, );
 
 
         if (!$data = $db->select(TOKEN_STATEMENT . ",password")->from("user")->Where("email=?", $email)->limit(1)->execute()->fetchObject()) {
-            Func::error("", 401, 'INVALID_EMAIL');
+            Func::error("INVALID_EMAIL", 401);
         }
 
         if (!password_verify($password, $data->password)) {
-            Func::error("The password is incorrect", 401, "INVALID_PASSWORD");
+            Func::error("INVALID_PASSWORD", 401);
         }
 
-       
+        if ($restaurant_id = $db->select('r.id')
+            ->from("restaurant r")
+            ->join("JOIN user_restaurant ur ON ur.restaurant_id = r.id ")
+            ->where("ur.user_id=?", $data->id)
+            ->orderBy("r.id asc")
+            ->limit(1)
+            ->execute()->fetchColumn()
+        ) {
+            $data->{"restaurant_id"} = $restaurant_id;
+        }
 
 
         unset($data->password);
@@ -40,7 +48,7 @@ $router->post(
     }
 );
 
-$router->post('/user/signup', function () {
+$router->post('signup', function () {
 
     require 'services/mailer/autoload.php';
 
@@ -50,15 +58,15 @@ $router->post('/user/signup', function () {
     $last_name = $_post->last_name;
     $email = $_post->email;
     $password = $_post->password;
-    $recaptchaToken = $_post->recaptchaToken;
+    // $recaptchaToken = $_post->recaptchaToken;
 
     try {
 
-        if (!Func::recaptcha($recaptchaToken))
-            Func::error("", 451, 'RECAPTCHA_ERROR');
+        // if (!Func::recaptcha($recaptchaToken))
+        //     Func::error("RECAPTCHA_ERROR", 451);
 
         if ($db->select("email")->from("user")->Where("email=?", $email)->limit(1)->execute()->fetchColumn())
-            Func::error("", 400, 'EMAIL_EXISTS');
+            Func::error("EMAIL_EXISTS", 400);
 
         $date = new DateTime('NOW');
         $date = $date->format('Y-m-d H:i:s');
@@ -89,7 +97,7 @@ $router->post('/user/signup', function () {
         $result["token"] = Auth::createToken($tokenInfo);
         $result['info']  = $tokenInfo;
 
-        /**** E-mail ****/
+        /**** E-mail Class in github https://github.com/PHPMailer/PHPMailer ****/
         $mail->setFrom('med@bensassi.net', 'MedBn\'s');
         $mail->addAddress('bensassi.medamine@gmail.com', 'Med amine');
         $mail->addAddress($email, $first_name . " " . $last_name);
@@ -105,12 +113,12 @@ $router->post('/user/signup', function () {
         }
         /**** E-mail ****/
     } catch (PDOException $e) {
-        Func::error($e->getMessage(), 400);
+        Func::error("PDO_EXCEPTION", 400, $e->getMessage());
     }
 });
 
 $router->put(
-    '/user/update',
+    'update',
     function () {
         global $_post, $db, $result;
 
