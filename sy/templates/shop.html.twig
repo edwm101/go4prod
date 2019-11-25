@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Shop
+{% endblock %}
+
+{% block body_classes %}
+	class="single-product full-width"
+{% endblock %}
+
+{% block body %}
+	<header class="page-header m-t-3">
+		<h1 class="page-title">{{products.query}}</h1>
+		<p class="woocommerce-result-count">Showing 1&ndash;15 of 20 results</p>
+	</header>
+
+	<div class="shop-control-bar">
+
+		<form class="woocommerce-ordering" method="get">
+			<select name="orderby" class="orderby">
+				<option value="menu_order" selected='selected'>Default sorting</option>
+				<option value="popularity">Sort by popularity</option>
+				<option value="rating">Sort by average rating</option>
+				<option value="date">Sort by newness</option>
+				<option value="price">Sort by price: low to high</option>
+				<option value="price-desc">Sort by price: high to low</option>
+			</select>
+		</form>
+		<form class="form-electro-wc-ppp">
+			<select name="ppp" onchange="this.form.submit()" class="electro-wc-wppp-select c-select">
+				<option value="15" selected='selected'>Show 15</option>
+				<option value="-1">Show All</option>
+			</select>
+		</form>
+		<nav class="electro-advanced-pagination">
+			<form method="post" class="form-adv-pagination"><input id="goto-page" size="2" min="1" max="2" step="1" type="number" class="form-control" value="1"/></form>
+			of 2<a class="next page-numbers" href="#">&rarr;</a>
+
+		</nav>
+	</div>
+
+	<div class="tab-content">
+
+		<div role="tabpanel" class="tab-pane active" id="grid" aria-expanded="true">
+
+			<ul class="products columns-4">
+				{% for product in products.items %}
+					<li class="product list-view list-view-small">
+						<div class="media">
+							<div class="media-left">
+								<a href="{{ path('products_show', {'id': product.id}) }}">
+									<img class="wp-post-image" src="{{product.image}}" alt="">
+								</a>
+							</div>
+							<div class="media-body media-middle">
+								<div class="row">
+									<div class="col-xs-12">
+
+										<a href="{{ path('products_show', {'id': product.id}) }}">
+											<h3>{{product.name}}</h3>
+											<div class="product-short-description">
+												{{product.short_description | raw}}
+											</div>
+
+										</a>
+									</div>
+									<div class="col-xs-12">
+										<div class="price-add-to-cart">
+											<span class="price">
+												<span class="electro-price">
+													<span class="amount">{{product.price}}DT</span>
+												</span>
+											</span>
+											<a class="button add_to_cart_button" href="{{ path('products_show', {'id': product.id}) }}" rel="nofollow">Add to cart</a>
+										</div>
+										<!-- /.price-add-to-cart -->
+
+										<div class="hover-area">
+											<div class="action-buttons">
+												<a href="#" rel="nofollow" class="add_to_wishlist">Wishlist</a>
+												<a href="" class="add-to-compare-link">Compare</a>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+				{% endfor %}
+
+			</ul>
+		</div>
+
+	</div>
+	<div class="shop-control-bar-bottom">
+		<form class="form-electro-wc-ppp">
+			<select class="electro-wc-wppp-select c-select" onchange="this.form.submit()" name="ppp">
+				<option selected="selected" value="15">Show 15</option>
+				<option value="-1">Show All</option>
+			</select>
+		</form>
+		<p class="woocommerce-result-count">Showing 1&ndash;15 of 20 results</p>
+		<nav class="woocommerce-pagination">
+			<ul class="page-numbers">
+				<li>
+					<span class="page-numbers current">1</span>
+				</li>
+				<li>
+					<a href="#" class="page-numbers">2</a>
+				</li>
+				<li>
+					<a href="#" class="next page-numbers">→</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+{% endblock %}

@@ -21,7 +21,7 @@
 						<div class="images electro-gallery">
 							<div class="thumbnails-single owl-carousel">
 								{% for image in product.images %}
-									<a href="{{image}}" class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
+									<a class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
 										<img src="assets/images/blank.gif" data-echo="{{image}}" class="wp-post-image" alt="">
 									</a>
 								{% endfor %}
@@ -78,7 +78,7 @@
 						<!-- .action-buttons -->
 
 						<div itemprop="description">
-							{{ product.shortDescription | raw }}
+							{{ product.short_description | raw }}
 						</div>
 						<!-- .description -->
 
