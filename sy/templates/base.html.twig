@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+			<link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+			<link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
+			<link rel="stylesheet" href="{{ asset('assets/css/font-electro.css') }}">
+			<link rel="stylesheet" href="{{ asset('assets/css/owl-carousel.css') }}">
+			<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+			<link rel="stylesheet" href="{{ asset('assets/css/yellow.css') }}">
+
+			<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,700italic,800,800italic,600italic,400italic,300italic' rel='stylesheet' type='text/css'>
+
+		{% endblock %}
+	</head>
+	<body {% block body_classes %} {% endblock %}>
+		<div id="page" class="hfeed site">
+			{% block header %}
+
+
+				<div class="top-bar ">
+					<div class="container">
+						<nav>
+							<ul id="menu-top-bar-left" class="nav nav-inline pull-left animate-dropdown flip">
+								<li class="menu-item animate-dropdown">
+									<a title="Welcome to Worldwide Electronics Store" href="#">Welcome to the Tunisian Products Finder</a>
+								</li>
+							</ul>
+						</nav>
+
+						<nav>
+							<ul id="menu-top-bar-right" class="nav nav-inline pull-right animate-dropdown flip">
+								<li class="menu-item animate-dropdown">
+									<a title="Store Locator" href="#">
+										<i class="ec ec-map-pointer"></i>Stores</a>
+								</li>
+
+								<li class="menu-item animate-dropdown">
+									<a title="Shop">
+										<i class="ec ec-shopping-bag"></i>Shop</a>
+								</li>
+								<li class="menu-item animate-dropdown">
+									<a title="My Account" href="{{ path('account_index') }}">
+										<i class="ec ec-user"></i>My Account</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<!-- /.top-bar -->
+
+				<header id="masthead" class="site-header header-v1">
+					<div class="container">
+						<div
+							class="row">
+
+							<!-- ============================================================= Header Logo ============================================================= -->
+							<div class="header-logo">
+								<a href="{{ path('products_index') }}" class="header-logo-link">
+									<img src="{{ asset('assets/images/logofinder.png') }}" alt="FinderTN" srcset="">
+								</a>
+							</div>
+							<!-- ============================================================= Header Logo : End============================================================= -->
+
+							<form class="navbar-search " method="get" action="/">
+								<label class="sr-only screen-reader-text" for="search">Search for:</label>
+								<div class="input-group">
+									<input type="text" id="search" class="form-control search-field" dir="ltr" value="" name="s" placeholder="Search for products"/>
+									<div class="input-group-addon search-categories">
+										<select name='product_cat' id='product_cat' class='postform resizeselect'>
+											<option value='0' selected='selected'>All Categories</option>
+											<option class="level-0" value="laptops-laptops-computers">Laptops</option>
+											<option class="level-0" value="ultrabooks-laptops-computers">Ultrabooks</option>
+											<option class="level-0" value="mac-computers-laptops">Mac Computers</option>
+											<option class="level-0" value="all-in-one-laptops-computers">All in One</option>
+											<option class="level-0" value="servers">Servers</option>
+											<option class="level-0" value="peripherals">Peripherals</option>
+											<option class="level-0" value="gaming-laptops-computers">Gaming</option>
+											<option class="level-0" value="accessories-laptops-computers">Accessories</option>
+											<option class="level-0" value="audio-speakers">Audio Speakers</option>
+											<option class="level-0" value="headphones">Headphones</option>
+											<option class="level-0" value="computer-cases">Computer Cases</option>
+											<option class="level-0" value="printers">Printers</option>
+											<option class="level-0" value="cameras">Cameras</option>
+											<option class="level-0" value="smartphones">Smartphones</option>
+											<option class="level-0" value="game-consoles">Game Consoles</option>
+											<option class="level-0" value="power-banks">Power Banks</option>
+											<option class="level-0" value="smartwatches">Smartwatches</option>
+											<option class="level-0" value="chargers">Chargers</option>
+											<option class="level-0" value="cases">Cases</option>
+											<option class="level-0" value="headphone-accessories">Headphone Accessories</option>
+											<option class="level-0" value="headphone-cases">Headphone Cases</option>
+											<option class="level-0" value="tablets">Tablets</option>
+											<option class="level-0" value="tvs">TVs</option>
+											<option class="level-0" value="wearables">Wearables</option>
+											<option class="level-0" value="pendrives">Pendrives</option>
+										</select>
+									</div>
+									<div class="input-group-btn">
+										<input type="hidden" id="search-param" name="post_type" value="product"/>
+										<button type="submit" class="btn btn-secondary">
+											<i class="ec ec-search"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+							<ul class="navbar-mini-cart navbar-nav animate-dropdown nav pull-right flip">
+								<li class="nav-item dropdown">
+									<a class="nav-link" data-toggle="dropdown">
+										<i class="ec ec-shopping-bag"></i>
+										<span class="cart-items-count count">0</span>
+										<span class="cart-items-total-price total-price">
+											<span class="amount">0.00DT</span>
+										</span>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-mini-cart">
+										<li>
+											<div class="widget_shopping_cart_content">
+
+												<ul class="cart_list product_list_widget "></ul>
+												<!-- end product list -->
+
+
+												<p class="total">
+													<strong>Subtotal:</strong>
+													<span class="amount">0.00</span>
+												</p>
+
+
+												<p class="buttons">
+													<a class="button wc-forward">View Cart</a>
+													<a class="button checkout wc-forward">Checkout</a>
+												</p>
+
+
+											</div>
+										</li>
+									</ul>
+								</li>
+							</ul>
+
+							<ul class="navbar-wishlist nav navbar-nav pull-right flip">
+								<li class="nav-item">
+									<a class="nav-link">
+										<i class="ec ec-favorites"></i>
+									</a>
+								</li>
+							</ul>
+							<ul class="navbar-compare nav navbar-nav pull-right flip">
+								<li class="nav-item">
+									<a class="nav-link">
+										<i class="ec ec-compare"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!-- /.row -->
+
+					</div>
+
+
+				</header>
+				<!-- #masthead -->
+			{% endblock %}
+
+
+			<div id="content" class="site-content">
+				<div id="content" class="site-content" tabindex="-1">
+					<div class="container"> {% block body %}{% endblock %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="copyright-bar">
+				<div class="container">
+					<div class="pull-left flip copyright">&copy;
+						<a href="http://demo2.transvelo.in/html/electro/">FinderTN</a>
+						- All Rights Reserved</div>
+					<div class="pull-right flip payment"></div>
+				</div>
+				<!-- /.container -->
+			</div>
+			<!-- /.copyright-bar -->
+			{% block javascripts %}
+
+				<script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/tether.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/bootstrap-hover-dropdown.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/echo.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/wow.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/jquery.waypoints.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets/js/electro.js') }}"></script>
+
+			{% endblock %}
+
+
+		</body>
+	</html>

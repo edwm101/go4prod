@@ -19,7 +19,7 @@ $router->get('', function () {
     global  $db, $result, $_get;
     $id = $_get->id;
     try {
-        $result["info"] = $db->select('*')
+         $result["info"] = $db->select('*')
             ->from("products p")
             ->join("left join categories c on c.id = p.category_id ")
             ->where("p.id=?", $id)

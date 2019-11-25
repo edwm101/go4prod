@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Finder TN
+{% endblock %}
+
+
+{% block body %}
+
+
+
+	<!-- /.home-v1-slider -->
+	<div class="home-v3-features-block animate-in-view fadeIn animated" data-animation="fadeIn">
+		<div class="features-list columns-5">
+			<div class="feature">
+				<div class="media">
+					<div class="media-left media-middle feature-icon">
+						<i class="ec ec-transport"></i>
+					</div>
+					<div class="media-body media-middle feature-text">
+						<strong>Free Delivery</strong>
+						from 50DT
+					</div>
+				</div>
+			</div>
+			<!-- .feature -->
+
+			<div class="feature">
+				<div class="media">
+					<div class="media-left media-middle feature-icon">
+						<i class="ec ec-customers"></i>
+					</div>
+					<div class="media-body media-middle feature-text">
+						<strong>99% Positive</strong>
+						Feedbacks
+					</div>
+				</div>
+			</div>
+			<!-- .feature -->
+
+			<div class="feature">
+				<div class="media">
+					<div class="media-left media-middle feature-icon">
+						<i class="ec ec-returning"></i>
+					</div>
+					<div class="media-body media-middle feature-text">
+						<strong>365 days</strong>
+						for free return
+					</div>
+				</div>
+			</div>
+			<!-- .feature -->
+
+			<div class="feature">
+				<div class="media">
+					<div class="media-left media-middle feature-icon">
+						<i class="ec ec-payment"></i>
+					</div>
+					<div class="media-body media-middle feature-text">
+						<strong>Payment</strong>
+						Secure System
+					</div>
+				</div>
+			</div>
+			<!-- .feature -->
+
+			<div class="feature">
+				<div class="media">
+					<div class="media-left media-middle feature-icon">
+						<i class="ec ec-tag"></i>
+					</div>
+					<div class="media-body media-middle feature-text">
+						<strong>Only Best</strong>
+						Brands
+					</div>
+				</div>
+			</div>
+			<!-- .feature -->
+		</div>
+		<!-- .features-list -->
+	</div>
+	<!-- .home-v3-features-block -->
+
+	<section class="home-v1-recently-viewed-products-carousel section-products-carousel animate-in-view fadeIn animated" data-animation="fadeIn">
+		<header>
+			<h2 class="h1">Recently Added</h2>
+			<div class="owl-nav">
+				<a href="#products-carousel-prev" data-target="#recently-added-products-carousel" class="slider-prev">
+					<i class="fa fa-angle-left"></i>
+				</a>
+				<a href="#products-carousel-next" data-target="#recently-added-products-carousel" class="slider-next">
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</div>
+		</header>
+
+		<div id="recently-added-products-carousel">
+			<div class="woocommerce columns-6">
+				<div class="products owl-carousel recently-added-products products-carousel columns-6">
+
+					{% for product in products %}
+						<div class="product">
+							<div class="product-outer">
+								<div class="product-inner">
+									<span class="loop-product-categories">
+										<a rel="tag">{{product.category.name}}</a>
+									</span>
+									<a href="{{ path('products_show', {'id': product.id}) }}">
+										<h3>{{ product.name }}</h3>
+										<div class="product-thumbnail">
+											<img src="{{ product.image }}" class="img-responsive" alt="">
+										</div>
+									</a>
+
+									<div class="price-add-to-cart">
+										<span class="price">
+											<span class="electro-price">
+												<ins>
+													<span class="amount">
+														{{ product.price }}DT</span>
+												</ins>
+												<span class="amount"></span>
+											</span>
+										</span>
+										<a rel="nofollow" href="" class="button add_to_cart_button">Add to cart</a>
+									</div>
+									<!-- /.price-add-to-cart -->
+
+									<div class="hover-area">
+										<div class="action-buttons">
+
+											<a href="#" class="add_to_wishlist">
+												Wishlist</a>
+
+											<a class="add-to-compare-link">
+												Compare</a>
+										</div>
+									</div>
+								</div>
+								<!-- /.product-inner -->
+							</div>
+							<!-- /.product-outer -->
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
