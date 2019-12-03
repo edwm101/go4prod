@@ -33,6 +33,22 @@ class Func
     }
 
 
+    public static function urlEexists($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($code == 200) {
+            $status = true;
+        } else {
+            $status = false;
+        }
+        curl_close($ch);
+        return $status;
+    }
+
     public static function requestMap($query)
     {
         $api_keys = [
@@ -218,7 +234,6 @@ class Func
 
     public static function upload($file, $name, $dir = UPLOAD_PATH, $allowed = array('image/*'), $maxSize = 1024)
     {
-        global $result;
 
         if (strpos($file, 'data:') == false) {
             $_data = file_get_contents($file);
@@ -234,17 +249,17 @@ class Func
             $handle->file_auto_rename = false;
             $handle->process($dir); //The position of the folder
             if ($handle->processed) {
-                $result["upload"] = true;
+                App::$response["upload"] = true;
                 $ext = $handle->file_dst_name_ext;
                 $handle->clean();
                 return $dir . $name . '.' . $ext;
             } else {
-                $result["upload"] = false;
-                $result["upload_error"] = $handle->error;
+                App::$response["upload"] = false;
+                App::$response["upload_error"] = $handle->error;
             }
         } else {
-            $result["upload"] = false;
-            $result["upload_error"] = $handle->error;
+            App::$response["upload"] = false;
+            App::$response["upload_error"] = $handle->error;
         }
     }
 

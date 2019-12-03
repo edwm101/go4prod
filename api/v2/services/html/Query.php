@@ -331,7 +331,7 @@ class Query
 
         if ($isSimpleSelector) {
             // if specified only the attribute name
-            $xpath = $value === null ? '@'.$name : sprintf('@%s="%s"', $name, $value);
+            $xpath = $value === null ? '@' . $name : sprintf('@%s="%s"', $name, $value);
 
             return $xpath;
         }
@@ -467,10 +467,10 @@ class Query
         $attrs = '(?P<attrs>(?:\[.+?\])*)?';
         $name = '(?P<pseudo>[\w\-]+)';
         $expr = '(?:\((?P<expr>[^\)]+)\))';
-        $pseudo = '(?::'.$name.$expr.'?)?';
+        $pseudo = '(?::' . $name . $expr . '?)?';
         $rel = '\s*(?P<rel>>)?';
 
-        $regexp = '/'.$tag.$id.$classes.$attrs.$pseudo.$rel.'/is';
+        $regexp = '/' . $tag . $id . $classes . $attrs . $pseudo . $rel . '/is';
 
         if (preg_match($regexp, $selector, $segments)) {
             if ($segments[0] === '') {

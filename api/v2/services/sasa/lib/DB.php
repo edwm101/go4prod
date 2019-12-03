@@ -304,7 +304,7 @@ class DB extends \PDO
     function delete($table, $where, $where_params)
     {
         $sql = "DELETE FROM " . $table . $this->buildWhere($where);
-        $stmt = $this->executeQuery($sql, $where_params);
+        $stmt = $this->xQuery($sql, $where_params);
 
         return $stmt;
     }
@@ -320,7 +320,7 @@ class DB extends \PDO
     function count($table, $where, $where_params = null)
     {
         $sql = "SELECT COUNT(*) FROM " . $table . $this->buildWhere($where);
-        $stmt = $this->executeQuery($sql, $where_params);
+        $stmt = $this->xQuery($sql, $where_params);
 
         return $stmt->fetchColumn();
     }
@@ -328,7 +328,7 @@ class DB extends \PDO
     /**
      * @deprecated since version 1.0
      */
-    function executeQuery($sql, $params = null)
+    function xQuery($sql, $params = null)
     {
         return $this->execQueryString($sql, $params);
     }
@@ -348,8 +348,25 @@ class DB extends \PDO
             $params = array($params);
         }
 
-        $stmt = $this->prepare($sql);
-        $stmt->execute($params);
+        try {
+            $stmt = $this->prepare($sql);
+            $stmt->execute($params);
+        } catch (\PDOException $e) {
+            http_response_code(400);
+            if (SHOW_PDO_EXCEPTION) {
+                echo json_encode(array(
+                    "reponse"  => 400,
+                    "status"  => "PDO_EXCEPTION",
+                    "error_message"   => $e->getMessage()
+                ));
+            } else {
+                echo json_encode(array(
+                    "reponse"  => 400,
+                    "status"  => "PDO_EXCEPTION"
+                ));
+            }
+            exit;
+        }
         return $stmt;
     }
 
@@ -418,7 +435,7 @@ class DB extends \PDO
     {
         $sql = "DESCRIBE $table";
 
-        return $this->executeQuery($sql)
+        return $this->xQuery($sql)
             ->fetchAll(self::FETCH_COLUMN);
     }
 

@@ -121,12 +121,12 @@ class Element
         $referenceNode = $this->node->firstChild;
 
         foreach ($nodes as $node) {
-            $result[] = $this->insertBefore($node, $referenceNode);
+            App::$response[] = $this->insertBefore($node, $referenceNode);
 
             $referenceNode = $this->node->firstChild;
         }
 
-        return $returnArray ? $result : $result[0];
+        return $returnArray ? $result : App::$response[0];
     }
 
     /**
@@ -169,7 +169,7 @@ class Element
             $clonedNode = $node->cloneNode(true);
             $newNode = $this->node->ownerDocument->importNode($clonedNode, true);
 
-            $result[] = $this->node->appendChild($newNode);
+            App::$response[] = $this->node->appendChild($newNode);
         }
 
         Errors::restore();
@@ -178,7 +178,7 @@ class Element
             return new Element($node);
         }, $result);
 
-        return $returnArray ? $result : $result[0];
+        return $returnArray ? $result : App::$response[0];
     }
 
     /**
@@ -573,7 +573,7 @@ class Element
             $result = [];
 
             foreach ($this->node->attributes as $name => $attribute) {
-                $result[$name] = $attribute->value;
+                App::$response[$name] = $attribute->value;
             }
 
             return $result;
@@ -583,7 +583,7 @@ class Element
 
         foreach ($this->node->attributes as $name => $attribute) {
             if (in_array($name, $names, true)) {
-                $result[$name] = $attribute->value;
+                App::$response[$name] = $attribute->value;
             }
         }
 
@@ -989,7 +989,7 @@ class Element
             $element = new Element($node);
 
             if ($nodeType === null) {
-                $result[] = $element;
+                App::$response[] = $element;
 
                 $node = $node->previousSibling;
 
@@ -1003,7 +1003,7 @@ class Element
             }
 
             if ($selector === null) {
-                $result[] = $element;
+                App::$response[] = $element;
 
                 $node = $node->previousSibling;
 
@@ -1011,7 +1011,7 @@ class Element
             }
 
             if ($element->matches($selector)) {
-                $result[] = $element;
+                App::$response[] = $element;
             }
 
             $node = $node->previousSibling;
@@ -1127,7 +1127,7 @@ class Element
             $element = new Element($node);
 
             if ($nodeType === null) {
-                $result[] = $element;
+                App::$response[] = $element;
 
                 $node = $node->nextSibling;
 
@@ -1141,7 +1141,7 @@ class Element
             }
 
             if ($selector === null) {
-                $result[] = $element;
+                App::$response[] = $element;
 
                 $node = $node->nextSibling;
 
@@ -1149,7 +1149,7 @@ class Element
             }
 
             if ($element->matches($selector)) {
-                $result[] = $element;
+                App::$response[] = $element;
             }
 
             $node = $node->nextSibling;

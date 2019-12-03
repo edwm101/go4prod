@@ -23,7 +23,6 @@ class AppController extends AbstractController
      */
     public function index(): Response
     {
-
         $httpClient = HttpClient::create();
         $response = $httpClient->request('GET', self::API_URL . 'products/all?max=10');
         $products = $response->toArray();

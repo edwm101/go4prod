@@ -196,7 +196,7 @@ class Document
             $cloned = $node->cloneNode(true);
             $newNode = $this->document->importNode($cloned, true);
 
-            $result[] = $this->document->appendChild($newNode);
+           $result[] = $this->document->appendChild($newNode);
 
             Errors::restore();
         }
@@ -205,7 +205,7 @@ class Document
             return new Element($node);
         }, $result);
 
-        return $returnArray ? $result : $result[0];
+        return $returnArray ? $result :$result[0];
     }
 
     /**
@@ -433,11 +433,11 @@ class Document
 
         if ($wrapNode) {
             foreach ($nodeList as $node) {
-                $result[] = $this->wrapNode($node);
+               $result[] = $this->wrapNode($node);
             }
         } else {
             foreach ($nodeList as $node) {
-                $result[] = $node;
+               $result[] = $node;
             }
         }
 

@@ -1,10 +1,9 @@
 <?php
 
-$router->mount('/products', function () use ($router) {
+App::mount('/products', function () {
     include_once("products.php");
 });
 
-
-$router->mount('/providers', function () use ($router) {
+App::mount('/providers', function () {
     include_once("providers.php");
 });

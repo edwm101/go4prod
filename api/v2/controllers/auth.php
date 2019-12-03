@@ -2,70 +2,54 @@
 
 
 
-$router->get('validation', function () {
-    global $result;
-    $result["info"] = Auth::authData();
-    $result["refresh_token"] = Auth::createToken(Auth::authData());
+App::get('validation', function () {
+    $token =  Auth::authData();
+    App::$response["info"] = $token;
+    App::$response["refresh_token"] = Auth::createToken($token);
 });
 
 
-$router->post(
-    'signin',
-    function () {
-        global $db, $result, $_post;
+App::post('signin', function () {
 
-        $email    = @$_post->email;
-        $password = @$_post->password;
-        $recaptchaToken = @$_post->recaptchaToken;
+    $email    = @App::$request["email"];
+    $password = @App::$request["password"];
+    // $recaptchaToken = @App::$request["recaptchaToken"];
 
-        // if (!Func::recaptcha($recaptchaToken))
-        //     Func::error("RECAPTCHA_ERROR", 451, );
+    // if (!Func::recaptcha($recaptchaToken))
+    //     Func::error("RECAPTCHA_ERROR", 451);
 
 
-        if (!$data = $db->select(TOKEN_STATEMENT . ",password")->from("user")->Where("email=?", $email)->limit(1)->execute()->fetchObject()) {
-            Func::error("INVALID_EMAIL", 401);
-        }
-
-        if (!password_verify($password, $data->password)) {
-            Func::error("INVALID_PASSWORD", 401);
-        }
-
-        if ($restaurant_id = $db->select('r.id')
-            ->from("restaurant r")
-            ->join("JOIN user_restaurant ur ON ur.restaurant_id = r.id ")
-            ->where("ur.user_id=?", $data->id)
-            ->orderBy("r.id asc")
-            ->limit(1)
-            ->execute()->fetchColumn()
-        ) {
-            $data->{"restaurant_id"} = $restaurant_id;
-        }
-
-
-        unset($data->password);
-        $result['info']  = $data;
-        $result["token"] = Auth::createToken($data);
+    if (!$data = App::db()->select(TOKEN_STATEMENT . ",password")->from("user")->Where("email=?", $email)->limit(1)->execute()->fetchObject()) {
+        Func::error("INVALID_EMAIL", 401);
     }
-);
 
-$router->post('signup', function () {
+    if (!password_verify($password, $data->password)) {
+        Func::error("INVALID_PASSWORD", 401);
+    }
+
+
+    unset($data->password);
+    App::$response['info']  = $data;
+    App::$response["token"] = Auth::createToken($data);
+});
+
+App::post('signup', function () {
 
     require 'services/mailer/autoload.php';
 
-    global $db, $result, $_post;
 
-    $first_name = $_post->first_name;
-    $last_name = $_post->last_name;
-    $email = $_post->email;
-    $password = $_post->password;
-    // $recaptchaToken = $_post->recaptchaToken;
+    $first_name = App::$request["first_name"];
+    $last_name = App::$request["last_name"];
+    $email = App::$request["email"];
+    $password = App::$request["password"];
+    // $recaptchaToken = App::$request["recaptchaToken"];
 
     try {
 
         // if (!Func::recaptcha($recaptchaToken))
         //     Func::error("RECAPTCHA_ERROR", 451);
 
-        if ($db->select("email")->from("user")->Where("email=?", $email)->limit(1)->execute()->fetchColumn())
+        if (App::db()->select("email")->from("user")->Where("email=?", $email)->limit(1)->execute()->fetchColumn())
             Func::error("EMAIL_EXISTS", 400);
 
         $date = new DateTime('NOW');
@@ -84,18 +68,18 @@ $router->post('signup', function () {
             "role" => "user"
         );
 
-        $db->insert("user", $info);
+        App::db()->insert("user", $info);
 
         $tokenInfo = array(
-            "id" => $db->lastInsertId(),
+            "id" => App::db()->lastInsertId(),
             "first_name" => $first_name,
             "last_name" => $last_name,
             "email" => $email,
             "role" => "user"
         );
 
-        $result["token"] = Auth::createToken($tokenInfo);
-        $result['info']  = $tokenInfo;
+        App::$response["token"] = Auth::createToken($tokenInfo);
+        App::$response['info']  = $tokenInfo;
 
         /**** E-mail Class in github https://github.com/PHPMailer/PHPMailer ****/
         $mail->setFrom('med@bensassi.net', 'MedBn\'s');
@@ -105,36 +89,34 @@ $router->post('signup', function () {
         $mail->msgHTML("<body> <h2>" . $first_name . " <br> Bienvenue chez nous :D</h2> </body>");
         //  $mail->addAttachment('../../static/images/couscous-2hmvJKPKOob.jpg');
 
-        if (!$mail->send()) {
-            $result["email_status"] = 'FAILED';
-            $result["email_error"] = $mail->ErrorInfo;
-        } else {
-            $result["email_status"] = 'OK';
-        }
+        // if (!$mail->send()) {
+        //     App::$response["email_status"] = 'FAILED';
+        //     App::$response["email_error"] = $mail->ErrorInfo;
+        // } else {
+        //     App::$response["email_status"] = 'OK';
+        // }
         /**** E-mail ****/
     } catch (PDOException $e) {
         Func::error("PDO_EXCEPTION", 400, $e->getMessage());
     }
 });
 
-$router->put(
-    'update',
-    function () {
-        global $_post, $db, $result;
+App::put('update', function () {
 
-        $first_name = $_post->first_name;
-        $last_name  = $_post->last_name;
+    $first_name = @App::$request["first_name"];
+    $last_name  = @App::$request["last_name"];
 
-        $info = array(
-            "first_name" => $first_name,
-            "last_name" => $last_name,
-        );
+    Func::emptyCheck([$first_name, $last_name]);
 
-        $db->update("user", $info, "id = ?", USER_ID);
+    $info = array(
+        "first_name" => $first_name,
+        "last_name" => $last_name,
+    );
 
-        $info = ShQuery::info(TOKEN_STATEMENT, "user", USER_ID);
+    App::db()->update("user", $info, "id = ?", TOKEN_ID);
 
-        $result["info"] = $info;
-        $result["token"] = (Auth::createToken($info));
-    }
-);
+    $info = ShQuery::info(TOKEN_STATEMENT, "user", TOKEN_ID);
+
+    App::$response["info"] = $info;
+    App::$response["token"] = (Auth::createToken($info));
+});

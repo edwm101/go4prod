@@ -1,6 +1,7 @@
 <?php
 
-require_once './config/database.php';
+require_once './core.php';
+require_once './services/sasa/autoload.php';
 
 function callbackhandler($matches)
 {
@@ -37,7 +38,7 @@ foreach ($table_fields as $field) {
     $type = str_replace("tinyint", "bool", $type);
     $type = str_replace("varchar", "string", $type);
     $type = str_replace("text", "string", $type);
-    $class .= "\$this->" . $field['Field'] . "= (" . $type . ") @\$data->" . $field['Field'] . "; \n";
+    $class .= "\$this->" . $field['Field'] . "= (" . $type . ") @\$data['" . $field['Field'] . "']; \n";
 }
 $class .= "} \n";
 
@@ -48,7 +49,7 @@ foreach ($table_fields as $field) {
     $type = str_replace("tinyint", "bool", $type);
     $type = str_replace("varchar", "string", $type);
     $type = str_replace("text", "string", $type);
-    
+
     $class .=  "public function get_" . $fieldUp . "()  
       {
         return (" . $type . ") \$this->" . $field['Field'] . ";}";

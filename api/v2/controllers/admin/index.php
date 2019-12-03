@@ -1,5 +1,10 @@
 <?php
-include_once("crawling/sitemap-convert.php");
-include_once("crawling/product-info.php");
-include_once("product.php");
-include_once("category.php");
+
+App::mount('/product', function () {
+    include_once("product.php");
+});
+
+
+App::mount('/crawling', function () {
+    include_once("crawling/index.php");
+});

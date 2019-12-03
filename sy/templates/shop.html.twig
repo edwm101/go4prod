@@ -10,8 +10,7 @@
 
 {% block body %}
 	<header class="page-header m-t-3">
-		<h1 class="page-title">{{products.query}}</h1>
-		<p class="woocommerce-result-count">Showing 1&ndash;15 of 20 results</p>
+		<h1 class="page-title">{{products.detail.q}}</h1>
 	</header>
 
 	<div class="shop-control-bar">
@@ -32,11 +31,7 @@
 				<option value="-1">Show All</option>
 			</select>
 		</form>
-		<nav class="electro-advanced-pagination">
-			<form method="post" class="form-adv-pagination"><input id="goto-page" size="2" min="1" max="2" step="1" type="number" class="form-control" value="1"/></form>
-			of 2<a class="next page-numbers" href="#">&rarr;</a>
-
-		</nav>
+	
 	</div>
 
 	<div class="tab-content">

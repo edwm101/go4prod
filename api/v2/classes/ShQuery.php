@@ -27,7 +27,7 @@ class ShQuery
 
         Func::emptyCheck([$id]);
 
-        if (self::$db->executeQuery("UPDATE " . $table_name . " SET status= NOT status WHERE id=?
+        if (self::$db->xQuery("UPDATE " . $table_name . " SET status= NOT status WHERE id=?
          and restaurant_id = ?", [$id, $restaurant_id])->rowCount() > 0) {
             return self::info("status", $table_name, $id);
         }

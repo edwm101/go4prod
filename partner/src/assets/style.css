@@ -1,0 +1,352 @@
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+input:-internal-autofill-selected {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.medcolor {
+  background-color: #fff !important;
+}
+
+/** ScrollBar **/
+.psSiderbarList {
+  height: calc(100vh - 131px);
+}
+
+.psApp {
+  height: 100vh;
+}
+
+.ps200 {
+  max-height: 210px;
+}
+
+.ps400 {
+  max-height: 360px;
+}
+
+.toolbar-simple {
+  -webkit-box-shadow: 0 0 3px #7d7b7b;
+  box-shadow: 1px 0px 1px #7d7b7b;
+  height: 66px !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+.v-list-item__action:first-child,
+.v-list-item__icon:first-child {
+  margin-right: 24px;
+}
+
+/** Light theme **/
+
+.v-avatar {
+  overflow: hidden;
+}
+.theme--light .v-dialog .modal {
+  background: #fdf9f9;
+}
+
+.toolbar-simple .v-toolbar__content {
+  height: 64px!important;
+}
+.theme--light.v-toolbar {
+  background: #fbfbfb;
+  -webkit-box-shadow: 0 0 14px #b0b0b0;
+  box-shadow: 0 0 14px #b0b0b0;
+  border: 0;
+}
+
+.theme--light.v-application {
+  background: #e8e5e5;
+}
+
+.theme--light.v-expansion-panels .v-expansion-panel {
+  margin-bottom: 3px;
+  border-radius: 3px;
+}
+
+/** Dark theme **/
+
+.theme--dark.v-toolbar.v-app-bar {
+  background: #1a3142;
+}
+
+/** End theme **/
+
+.v-navigation-drawer .v-list {
+  padding: 0;
+}
+
+.v-btn:focus::before {
+  opacity: 0 !important;
+}
+
+.v-expansion-panel-content__wrap {
+  padding: 0;
+}
+
+@media only screen and (max-width: 959px) {
+  .container {
+    padding: 4px !important;
+  }
+}
+
+/** swal***/
+.swal2-toast {
+  -webkit-box-shadow: 0 0 0.25em #848484 !important;
+  box-shadow: 0 0 0em #434343 !important;
+  /*! border-radius: 0.4em !important; */
+  min-width: 270px;
+}
+
+.swal-error * {
+  color: #ffff;
+  border-color: #fff !important;
+}
+
+.swal-error {
+  background: #ff4c4c !important;
+}
+
+.swal2-error [class^="swal2-x-mark-line"] {
+  background-color: white !important;
+}
+
+.swal-success * {
+  color: #ffff;
+}
+
+.swal-success {
+  background: rgb(138, 170, 102) !important;
+}
+
+.swal-success .swal2-success-ring {
+  border: 0.25em solid rgba(255, 255, 255, 0.39) !important;
+}
+
+.swal-success [class^="swal2-success-line"] {
+  background-color: #fff !important;
+}
+
+.swal-info * {
+  color: #000 !important;
+}
+
+.swal-info {
+  background: #fff !important;
+}
+
+.swal-info .swal2-icon.swal2-info::before {
+  font-size: 2.8em !important;
+}
+.swal2-title {
+  font-size: 1.275em;
+  font-weight: 500;
+}
+.swal-warning * {
+  color: #ffff !important;
+}
+
+.swal-warning {
+  background: orange !important;
+}
+
+/** swal **/
+
+.header {
+  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(255, 255, 255, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(255, 255, 255, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.ps__rail-y {
+  z-index: 3;
+}
+
+.handle {
+  cursor: move;
+}
+
+.dashViewTabs .v-tabs__bar {
+  background: #f1f1f1 !important;
+}
+
+.dashViewTabs {
+  position: fixed;
+  z-index: 2;
+  -webkit-box-shadow: 0 0 3px #7d7b7b;
+  box-shadow: 1px 0px 1px #7d7b7b;
+  width: inherit;
+}
+
+.backAuth {
+  background-image: url(http://partner.bensassi.net/restoking/assets/images/background/login.JPG) !important;
+  background-size: cover !important;
+}
+
+.backAuth .overflow {
+  background-color: rgba(255, 255, 255, 0.91);
+}
+
+button.swal2-styled {
+  will-change: box-shadow;
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 2px !important;
+}
+
+.swal2-popup {
+  border-radius: 2px;
+  background: #fff3f3;
+  font-size: 1rem;
+  top: 10px;
+  border-radius: 5px !important;
+  width: 23em;
+  padding: 0.2em;
+}
+button.swal2-close {
+  font-size: 26px;
+  font-weight: bold;
+}
+.cp {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.br-1 {
+  border-right: 1px solid #f1f1f1;
+}
+
+.border {
+  border: 1px solid #f1f1f1;
+}
+
+.bsi {
+  -webkit-box-shadow: inset 0 0 5px #c9b4b4 !important;
+  box-shadow: inset 0 0 5px #c9b4b4 !important;
+}
+
+/** Tabel **/
+
+.simple-table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.simple-table td:last-child,
+.simple-table th:last-child {
+  border-right: 0;
+}
+
+.simple-table td:first-child,
+.simple-table th:first-child {
+  border-left: 0;
+}
+
+.simple-table td,
+.simple-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.simple-table tr:hover {
+  background-color: #ddd;
+}
+
+.simple-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  font-size: 13px;
+}
+
+.dragArea {
+  width: 100%;
+}
+
+.dragArea > :first-child {
+  /* width: 100%; */
+  min-height: 50px;
+  display: block;
+}
+
+.theme--light.v-input--switch .v-input--switch__thumb {
+  color: #f1f1f1;
+}
+.xsmall {
+  max-width: initial;
+  max-height: 29px;
+  min-width: initial !important;
+}
+.v-expansion-panel-header {
+  padding: 12px;
+}
+
+.v-expansion-panel::before {
+  -webkit-box-shadow: 0 0.66667px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0 0.66667px 2px rgba(0, 0, 0, 0.27);
+}
+.v-card__title {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+.v-btn:not(.v-btn--round).v-size--large {
+  height: 49px;
+}
+.v-expansion-panel-header {
+  font-size: 0.8375rem;
+  min-height: 50px;
+}
+.v-toolbar__title {
+  text-transform: capitalize;
+}
+.v-menu__content {
+  -webkit-box-shadow: 0 1px 3px #a2a2a2;
+  box-shadow: 0 1px 3px #a2a2a2;
+  border-radius: 5px !important;
+}
+.v-menu__content .v-list {
+  padding: 0;
+}
+
+.v-input--selection-controls__ripple {
+  height: 30px;
+  width: 30px;
+  left: -12px;
+  top: calc(50% - 24px);
+  margin: 9px 9.6px;
+}
+
+.v-menu__content .v-list-item {
+  border-bottom: 0.7px solid #f1f1f1;
+}
+
+.theme--light.v-card {
+  -webkit-box-shadow: 0 0.66667px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0 0.66667px 2px rgba(0, 0, 0, 0.27);
+  overflow: hidden;
+}
+
+.v-list--three-line .v-list-item,
+.v-list-item--three-line {
+  min-height: auto;
+}
+
+@media only screen and (max-width: 959px) {
+  .container {
+    padding: 0px;
+  }
+}

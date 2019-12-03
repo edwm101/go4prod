@@ -205,7 +205,7 @@ class StyleAttribute
             }
 
             if (array_key_exists($propertyName, $this->properties)) {
-                $result[$propertyName] = $this->properties[$propertyName];
+                App::$response[$propertyName] = $this->properties[$propertyName];
             }
         }
 
