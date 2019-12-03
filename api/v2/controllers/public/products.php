@@ -4,7 +4,7 @@
 App::get('all', function () {
     $max = App::$request["max"] ?? 10;
     App::$response["items"] = App::db()
-        ->select('p.id,p.nam,p.price,p.image,c.name as cat_name')
+        ->select('p.id,p.name,p.price,p.image,c.name as cat_name')
         ->from("products p")
         ->join("left join categories c on c.id = p.category_id ")
         ->orderBy("p.id desc")
