@@ -1,8 +1,6 @@
 <?php
 // show error reporting
 error_reporting(E_ALL);
-
-//You need to change it to true in production !!!!
 define("SHOW_PDO_EXCEPTION", true);
 
 //DB define

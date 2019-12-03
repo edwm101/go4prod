@@ -5,3 +5,11 @@ export function r_getProducts(params) {
     params
   });
 }
+
+export function r_deleteProduct(id) {
+  return request("admin/product/", "DELETE", {
+    params: {
+      id
+    }
+  });
+}

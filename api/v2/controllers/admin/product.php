@@ -20,8 +20,6 @@ App::post('', function () {
     );
 });
 
-
-
 App::get('', function () {
     $id = @App::$request["id"];
     Func::emptyCheck([$id]);
@@ -31,7 +29,7 @@ App::get('', function () {
 App::put('', function () {
     $id = @App::$request["id"];
     Func::emptyCheck([$id]);
-    App::db()->update(
+    App::$response["result"] = App::db()->update(
         "products",
         [
             "id"     => $id,
@@ -49,7 +47,7 @@ App::put('', function () {
     );
 });
 
-App::delete('{id}', function ($id) {
+App::delete('', function () {
     $id = @App::$request["id"];
     Func::emptyCheck([$id]);
     App::db()->delete("products", "id=?", $id);

@@ -24,10 +24,22 @@
                 ></v-select>
               </v-col>
               <v-col class="d-flex pa-2" cols="12" sm="3">
-                <v-text-field label="Min price" v-model="min_price" type="number" hide-details outlined></v-text-field>
+                <v-text-field
+                  label="Min price"
+                  v-model="min_price"
+                  type="number"
+                  hide-details
+                  outlined
+                ></v-text-field>
               </v-col>
               <v-col class="d-flex pa-2" cols="12" sm="3">
-                <v-text-field label="Max price" v-model="max_price" type="number" hide-details outlined></v-text-field>
+                <v-text-field
+                  label="Max price"
+                  v-model="max_price"
+                  type="number"
+                  hide-details
+                  outlined
+                ></v-text-field>
               </v-col>
             </v-row>
             <v-divider></v-divider>
@@ -47,7 +59,7 @@
               </template>
               <template v-slot:item.action="{ item }">
                 <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+                <v-icon small @click="deleteItem(item.id)">mdi-delete</v-icon>
               </template>
             </v-data-table>
           </v-card>
@@ -60,7 +72,7 @@
 
 
 <script>
-import { r_getProducts } from "@/api/admin/products";
+import { r_getProducts, r_deleteProduct } from "@/api/admin/products";
 export default {
   data() {
     return {
@@ -110,6 +122,11 @@ export default {
     }
   },
   methods: {
+    deleteItem(id) {
+      r_deleteProduct(id).then(res => {
+        this.initData();
+      });
+    },
     async initData() {
       var response = await r_getProducts({
         q: this.search,
