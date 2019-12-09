@@ -65,9 +65,6 @@ class AppController extends AbstractController
      */
     public function account_index(): Response
     {
-
-
-
         return $this->render('users/account.html.twig', [
             'products' => "",
         ]);

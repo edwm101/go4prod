@@ -12,11 +12,24 @@
 
 				<div class="col2-set" id="customer_login">
 
+
 					<div class="col-1">
 
 
 						<h2>Login</h2>
 
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+
+						{% if app.user %}
+							<div class="mb-3">
+								You are logged in as
+								{{ app.user.username }},
+								<a href="{{ path('app_logout') }}">Logout</a>
+							</div>
+						{% endif %}
+						
 						<form method="post" class="login">
 
 							<p class="before-login-text">Welcome back! Sign in to your account</p>
@@ -33,15 +46,14 @@
 								<input class="input-text" type="password" name="password" id="password"/>
 							</p>
 
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
 							<p class="form-row">
 								<input class="button" type="submit" value="Login" name="login">
-								<label for="rememberme" class="inline"><input name="rememberme" type="checkbox" id="rememberme" value="forever"/>
+								<label for="rememberme" class="inline"><input name="_remember_me" type="checkbox" id="rememberme" value="forever"/>
 									Remember me</label>
 							</p>
 
-							<p class="lost_password">
-								<a href="">Lost your password?</a>
-							</p>
 
 						</form>
 

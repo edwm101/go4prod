@@ -42,46 +42,5 @@ class Categories
      */
     private $catId;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getParentId(): ?int
-    {
-        return $this->parentId;
-    }
-
-    public function setParentId(?int $parentId): self
-    {
-        $this->parentId = $parentId;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCatId(): ?string
-    {
-        return $this->catId;
-    }
-
-    public function setCatId(string $catId): self
-    {
-        $this->catId = $catId;
-
-        return $this;
-    }
-
 
 }
