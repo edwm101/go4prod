@@ -20,7 +20,6 @@ App::get('', function () {
     App::$response["info"] = $info;
 });
 
-
 App::get('find', function () {
 
     $max = App::$request["max"] ?? 10;

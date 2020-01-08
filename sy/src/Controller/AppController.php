@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Products;
-use App\Form\Products1Type;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,12 +21,9 @@ class AppController extends AbstractController
     /**
      * @Route("/", name="products_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ProductRepository $productRepository): Response
     {
-        $httpClient = HttpClient::create();
-        $response = $httpClient->request('GET', self::API_URL . 'products/all?max=10');
-        $products = $response->toArray();
-        $products = $products["items"];
+        $products = $productRepository->findProducts(10);
         return $this->render('index.html.twig', [
             'products' => $products,
         ]);
@@ -35,15 +32,21 @@ class AppController extends AbstractController
     /**
      * @Route("/shop/", name="shop_show", methods={"GET"})
      */
-    public function shop(Request $request): Response
+    public function shop( Request $request, ProductRepository $productRepository): Response
     {
-        $q = $request->query->get('q');
-        $httpClient = HttpClient::create();
-        $response = $httpClient->request('GET', self::API_URL . 'products/find/?q='.$q);
-        $products = $response->toArray();
-        $products = $products;
+
+        if (!$this->getUser()) return $this->redirectToRoute('products_index');
+        
+        $q = $request->query->get('q') ?? '';
+        // $httpClient = HttpClient::create();
+        // $response = $httpClient->request('GET', self::API_URL . 'products/find/?q=' . $q);
+        // $products = $response->toArray();
+        // $products = $products;
+        $products = $productRepository->findProducts(24, $q);
+
         return $this->render('shop.html.twig', [
             'products' => $products,
+            'query' => $q
         ]);
     }
 
@@ -52,12 +55,18 @@ class AppController extends AbstractController
      */
     public function show($id): Response
     {
-        $httpClient = HttpClient::create();
-        $response = $httpClient->request('GET', self::API_URL . 'products?id=' . $id);
-        $product = $response->toArray();
-        $product = $product["info"];
+        // $httpClient = HttpClient::create();
+        // $response = $httpClient->request('GET', self::API_URL . 'products?id=' . $id);
+        // $product = $response->toArray();
+        // $product = $product["info"];
+
+        $product = $this->getDoctrine()->getRepository(Products::class)->find($id);
+        $product->setDescription(str_replace("Soyez le premier à donner votre avis !", "", $product->getDescription()));
+        $images = explode(",", str_replace('small_default', 'large_default', $product->getImages()));
+
         return $this->render('show.html.twig', [
             'product' => $product,
+            'images' => $images
         ]);
     }
     /**

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ product.name }}
+{% block title %}
+	{{ product.name }}
 {% endblock %}
 
 {% block body_classes %}
@@ -20,7 +21,7 @@
 
 						<div class="images electro-gallery">
 							<div class="thumbnails-single owl-carousel">
-								{% for image in product.images %}
+								{% for image in images %}
 									<a class="zoom" title="" data-rel="prettyPhoto[product-gallery]">
 										<img src="assets/images/blank.gif" data-echo="{{image}}" class="wp-post-image" alt="">
 									</a>
@@ -29,10 +30,9 @@
 							<!-- .thumbnails-single -->
 
 							<div class="thumbnails-all columns-5 owl-carousel">
-								{% for image in product.images %}
+								{% for image in images %}
 									<a href="{{image}}" class="first" title="">
-                                    <img src="assets/images/blank.gif" data-echo="{{image}}"
-                                     class="wp-post-image" alt=""></a>
+										<img src="assets/images/blank.gif" data-echo="{{image}}" class="wp-post-image" alt=""></a>
 								{% endfor %}
 
 							</div>
@@ -46,12 +46,13 @@
 					<div class="summary entry-summary">
 
 						<span class="loop-product-categories">
-							<a href="product-category.html" rel="tag">MyTek</a>
+							<a  rel="tag">MyTek</a>
 						</span>
 						<!-- /.loop-product-categories -->
 
 						<h1 itemprop="name" class="product_title entry-title">{{ product.name }}</h1>
-						<h3 itemprop="name" class="product_title entry-title">{{ product.price }} DT</h3>
+						<h3 itemprop="name" class="product_title entry-title">{{ product.price }}
+							DT</h3>
 
 						<div class="brand">
 							<a href="product-category.html">
@@ -67,53 +68,17 @@
 
 						<hr class="single-product-title-divider"/>
 
-						<div class="action-buttons">
 
-							<a href="#" class="add_to_wishlist">
-								Wishlist
-							</a>
-
-
-							<a href="#" class="add-to-compare-link" data-product_id="2452">Compare</a>
-						</div>
-						<!-- .action-buttons -->
+							<a rel="nofollow" class=" single_add_to_cart_button button" 
+							href="{{ product.curl }}?ref=elfinder.tn" target="_blanc">Vers le site marchand</a>
+						<br>
+						<hr class="single-product-title-divider"/>
 
 						<div itemprop="description">
-							{{ product.short_description | raw }}
+							{{ product.description | raw }}
 						</div>
 						<!-- .description -->
 
-						<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-
-							<p class="price">
-								<span class="electro-price">
-									<ins>
-										<span class="amount"></span>
-									</ins>
-
-								</span>
-							</p>
-
-
-						</div>
-						<!-- /itemprop -->
-
-						<form class="variations_form cart" method="post">
-
-
-							<div class="single_variation_wrap">
-								<div class="woocommerce-variation single_variation"></div>
-								<div class="woocommerce-variation-add-to-cart variations_button">
-								
-                                    
-                                     
-									<a type="submit" rel="nofollow" class="single_add_to_cart_button button" href="{{ product.curl }}" target="_blanc">Vers le site marchand</a>
-									<input type="hidden" name="add-to-cart" value="2452"/>
-									<input type="hidden" name="product_id" value="2452"/>
-									<input type="hidden" name="variation_id" class="variation_id" value="0"/>
-								</div>
-							</div>
-						</form>
 
 					</div>
 					<!-- .summary -->

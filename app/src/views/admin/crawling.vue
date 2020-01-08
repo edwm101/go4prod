@@ -47,10 +47,11 @@
               </v-flex>
             </v-layout>
           </v-flex>
+        
           <v-flex text-right>
             <v-btn class="mr-3" small dark v-if="filter.time != 0">{{filter.time}}</v-btn>
-            <v-btn class="primary elevation-1" fab @click="toggle">
-              <v-icon large>{{ filter.isPlaying ? 'mdi-pause' : 'mdi-play' }}</v-icon>
+            <v-btn class="primary elevation-1"  @click="toggle">
+              <v-icon large>{{ filter.isPlaying ? 'mdi-pause' : 'mdi-play' }}</v-icon> ({{products.length}})
             </v-btn>
           </v-flex>
         </v-layout>
@@ -63,7 +64,7 @@
           append-icon="mdi-target"
           @click:append="getRestoInfo"
         ></v-text-field>
-
+  
         <v-layout wrap>
           <v-flex xs12 sm4 pa-1 v-for="(product,key) in products" :key="key">
             <div v-if="key<6">

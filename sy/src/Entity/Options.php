@@ -35,5 +35,34 @@ class Options
      */
     private $optionname;
 
+    public function getOptionid(): ?int
+    {
+        return $this->optionid;
+    }
+
+    public function getOptiongroupid(): ?int
+    {
+        return $this->optiongroupid;
+    }
+
+    public function setOptiongroupid(?int $optiongroupid): self
+    {
+        $this->optiongroupid = $optiongroupid;
+
+        return $this;
+    }
+
+    public function getOptionname(): ?string
+    {
+        return $this->optionname;
+    }
+
+    public function setOptionname(?string $optionname): self
+    {
+        $this->optionname = $optionname;
+
+        return $this;
+    }
+
 
 }

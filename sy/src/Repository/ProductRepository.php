@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Product;
+use App\Entity\Products;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -16,27 +16,27 @@ class ProductRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Product::class);
+        parent::__construct($registry, Products::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
 
-    // public function findByProductWithCat($max)
-    // {
-    //     return $this->createQueryBuilder('p')
-    //         ->select("p,c.name as cat_name")
-    //         ->join('Left join catergory c ', 'c.id = p.categoryId')
-    //         ->orderBy('p.id', 'ASC')
-    //         ->setMaxResults($max)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    public function findProducts($max = 10, $q = "")
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->andWhere("p.name LIKE CONCAT('%',:name,'%')")
+            ->setParameter('name', $q)
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+    }
 
 
     /**
-      * @return Product[] Returns an array of Product objects
+     * @return Product[] Returns an array of Product objects
      **/
 
     public function findByExampleField($value)
@@ -47,10 +47,9 @@ class ProductRepository extends ServiceEntityRepository
             ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    
+
 
     /*
     public function findOneBySomeField($value): ?Product

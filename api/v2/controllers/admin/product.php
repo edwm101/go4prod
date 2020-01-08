@@ -23,7 +23,8 @@ App::post('', function () {
 App::get('', function () { 
     $id = @App::$request["id"];
     Func::emptyCheck([$id]);
-    App::$response["info"] = ShQuery::info("*", "products", $id);
+    App::$response["email"] = TOKEN_EMAIL;
+    App::$response["info"] = ShQuery::info("*", "produc", $id);
 });
 
 App::put('', function () {

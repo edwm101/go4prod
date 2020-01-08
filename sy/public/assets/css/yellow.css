@@ -148,8 +148,9 @@ table.cart .actions .checkout-button,
 .btn-primary,
 input[type="submit"] {
   color: #333e48;
-  background-color: #f3a847;
-  border-color: #f3a847;
+  background-color: #0e72ef;
+  border-color: #0e72ef;
+  box-shadow: 0 1px 2px #d0d0d0;
   }
   .widget_price_filter .price_slider_amount .button:hover,
   .dropdown-menu-mini-cart .wc-forward.checkout:hover,
