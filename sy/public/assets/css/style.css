@@ -400,10 +400,10 @@ input[type="submit"] {
   padding: 1.036em 2.134em;
   border-width: 0;
   display: inline-block;
-  color: #333e48;
+  /* color: #ffffff; */
   /* background-color: #efecec; */
-  /* border-color: #efecec; */
-  /* box-shadow: 0 1px 2px #bfbfbf; */
+  border-color: #efecec;
+  box-shadow: 0 1px 2px #bfbfbf;
 }
 .btn:hover,
 .hero-action-btn:hover,
@@ -18876,5 +18876,6 @@ input#search {
   background: #ffffff !important;
   border: 0;
   color: #000 !important;
+  box-shadow: none;
 }
 

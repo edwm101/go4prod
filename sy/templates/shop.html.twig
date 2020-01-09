@@ -23,12 +23,12 @@
 					<div class="col-6 p-a-1 col-lg-3">
 						<div class="ui card">
 							<div class="image x">
-								<a href="{{ path('products_show', {'id': product.id} ) }}">
+								<a href="{{ path('product_show', {'id': product.id} ) }}">
 									<img class="pa-3" src="{{product.image}}">
 								</a>
 							</div>
 							<div class="content">
-								<div class="header">{{product.name}}</div>
+								<a class="header" href="{{ path('product_show', {'id': product.id} ) }}">{{product.name}}</a>
 								<div class="meta">
 									<a>{{product.getCategory.name}}</a>
 								</div>

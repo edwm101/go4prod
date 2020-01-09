@@ -55,7 +55,10 @@
 									<li class="menu-item animate-dropdown">
 										{{ app.user.getFirstname()}}
 										{{app.user.getLastname() }},
-										<a href="{{ path('app_logout') }}">Log out</a>
+										<a href="{{ path('app_logout') }}">Log out -
+										</a>
+										<a href="{{ path('products_index') }}">
+											Products</a>
 									</li>
 								{% else %}
 									<li class="menu-item animate-dropdown">
@@ -78,7 +81,7 @@
 
 							<!-- ============================================================= Header Logo ============================================================= -->
 							<div class="header-logo">
-								<a href="{{ path('products_index') }}" class="header-logo-link">
+								<a href="{{ path('index') }}" class="header-logo-link">
 									<img src="{{ asset('assets/images/logofinder.png') }}" alt="FinderTN" srcset="">
 								</a>
 							</div>
@@ -88,7 +91,7 @@
 								<label class="sr-only screen-reader-text" for="search">Search for:</label>
 								<div class="input-group">
 									<input type="text" id="search" class="form-control search-field" dir="ltr" value="" name="q" placeholder="Search for products"/>
-								
+
 									<div class="input-group-btn">
 										<button type="submit" class="btn btn-secondary">
 											<i class="ec ec-search"></i>
@@ -131,7 +134,7 @@
 								</li>
 							</ul>
 
-							
+
 						</div>
 						<!-- /.row -->
 

@@ -16,7 +16,7 @@ class SecurityController extends AbstractController
     public function login(Request $req, AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('products_index');
+            return $this->redirectToRoute('index');
         }
         $error = $authenticationUtils->getLastAuthenticationError();
         return $this->render('users/account.html.twig', ['error' => $error]);

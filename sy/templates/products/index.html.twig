@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products index
+{% endblock %}
+
+{% block body %}
+
+	<table class="table ui  celled striped table " style="margin-top : 20px">
+		<thead>
+			<tr>
+				<th colspan="4">
+					<h3>Products</h3>
+				</th>
+				<th colspan="1">
+					<a class="ui right  small btn-primary btn-to labeled  btn" href="{{ path('products_new') }}">
+						Create new
+					</a>
+
+				</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+			{% for product in products %}
+				<tr>
+					<td>#{{ product.id }}</td>
+					<td>{{ product.name }}</td>
+					<td>{{ product.price }}TND</td>
+					<td style="padding:1px 0 0 1px"> <img src="{{ product.image }}" alt="" width="50px"></td>
+					<td>
+						<a href="{{ path('products_show', {'id': product.id}) }}" class="btn btn-success">show</a>
+						<a href="{{ path('products_edit', {'id': product.id}) }}" class="btn btn-primary">edit</a>
+					</td>
+				</tr>
+
+			{% else %}
+				<tr>
+					<td colspan="14">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+
+	</table>
+
+{% endblock %}

@@ -9,3 +9,31 @@
 .sf-toolbar.sf-error-toolbar {
   display: none;
 }
+
+div#products2 label {
+  min-width: 101px;
+}
+
+div#products2 input {
+  height: 39px;
+  margin-bottom: 11px;
+  min-width: 214px;
+}
+
+div#products2 textarea {
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  overflow: auto;
+  background-color: #fff!important;
+  box-shadow: 0 1px 3px #9a9a9a;
+}
+
+.table tbody{
+  width: 100%;
+  overflow: auto;
+ 
+  max-height: 400px;
+}

@@ -19,7 +19,7 @@ class AppController extends AbstractController
     const API_URL = "http://localhost/go4prod/api/v2/public/";
 
     /**
-     * @Route("/", name="products_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(ProductRepository $productRepository): Response
     {
@@ -35,7 +35,7 @@ class AppController extends AbstractController
     public function shop( Request $request, ProductRepository $productRepository): Response
     {
 
-        if (!$this->getUser()) return $this->redirectToRoute('products_index');
+        // if (!$this->getUser()) return $this->redirectToRoute('index');
         
         $q = $request->query->get('q') ?? '';
         // $httpClient = HttpClient::create();
@@ -51,7 +51,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/products/{id}", name="products_show", methods={"GET"})
+     * @Route("/product/{id}", name="product_show", methods={"GET"})
      */
     public function show($id): Response
     {
